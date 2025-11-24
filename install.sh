@@ -73,13 +73,29 @@ else
     echo "Skipping rofi"
 fi
 
+if ask "Install wofi and deploy its config?"; then
+    sudo pacman -S --needed --noconfirm wofi
+    replace_config "wofi"
+else
+    echo "Skipping wofi"
+fi
+
+if ask "Install hyprlock and deploy its config?"; then
+    sudo pacman -S --needed --noconfirm hyprlock
+else
+    echo "Skipping hyprlock"
+fi
+
+if ask "Install wlogout and deploy its config?"; then
+    sudo pacman -S --needed --noconfirm wlogout
+else
+    echo "Skipping wlogout"
+fi
+
+
 echo ""
 
-if ask "Replace default Hyprland keybindings and full hypr config? (hypr/)"; then
-    replace_config "hypr"
-else
-    echo "Keeping your current Hyprland config (including keybinds.conf)"
-fi
+replace_config "hypr"
 
 # Auto-clean old backups (keep only 3 newest)
 echo ""
