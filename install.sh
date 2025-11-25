@@ -73,13 +73,6 @@ else
     echo "Skipping rofi"
 fi
 
-if ask "Install wofi and deploy its config?"; then
-    sudo pacman -S --needed --noconfirm wofi
-    replace_config "wofi"
-else
-    echo "Skipping wofi"
-fi
-
 if ask "Install hyprlock and deploy its config?"; then
     sudo pacman -S --needed --noconfirm hyprlock
 else
