@@ -123,6 +123,7 @@ fi
 
 if ask "Install hyprlock and deploy its config?"; then
     sudo pacman -S --needed --noconfirm hyprlock
+    replace_config "hyprlock"
 else
     echo "Skipping hyprlock"
 fi
