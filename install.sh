@@ -109,26 +109,26 @@ EOF
 
     # === Dolphin right-click: Set as Wallpaper ===
     echo "   Adding 'Set as Wallpaper (Hyprpaper)' to Dolphin context menu..."
-    mkdir -p "$HOME/.local/share/kservices5/ServiceMenus"
+    mkdir -p "$HOME/.local/share/kio/servicemenus"
 
-    cat > "$HOME/.local/share/kservices5/hyprpaper-set-wallpaper.desktop" << 'EOF'
+    cat > "$HOME/.local/share/kio/servicemenus/hyprpaper-set-wallpaper.desktop" << 'EOF'
 [Desktop Entry]
 Type=Service
-ServiceTypes=Konqueror/Service
-MimeType=image/jpeg;image/png;image/webp;image/bmp;image/avif;
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=image/jpg;image/jpeg;image/png;image/webp;image/bmp;image/avif;
 Actions=setWallpaper;
-X-KDE-Priority=TopLevel
-X-KDE-StartupNotify=false
-Icon=preferences-desktop-wallpaper
 
 [Desktop Action setWallpaper]
 Name=Set as Wallpaper (Hyprpaper)
-Exec=hyprctl hyprpaper wallpaper ",%f" && notify-send "Wallpaper Set" "%f" -i "%f"
+Exec=hyprctl hyprpaper reload ",%f" && notify-send "Wallpaper Set" "%f" -i "%f"
 Icon=preferences-desktop-wallpaper
 EOF
 
-    update-desktop-database "$HOME/.local/share/kservices5/ServiceMenus/" 2>/dev/null || true
+    chmod +x "$HOME/.local/share/kio/servicemenus/hyprpaper-set-wallpaper.desktop"
+
+    update-desktop-database "$HOME/.local/share/kio/servicemenus/" 2>/dev/null || true
     kbuildsycoca5 2>/dev/null || true
+    kbuildsycoca6 2>/dev/null || true 
 
     echo "   Done! Right-click any image in Dolphin → 'Set as Wallpaper (Hyprpaper)'"
 else
