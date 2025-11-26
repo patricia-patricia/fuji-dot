@@ -1,9 +1,9 @@
 Minimal dot. Install only what you need.
 
 - Waybar
-- Rofi (Theme by <a href="https://github.com/newmanls/rofi-themes-collection">Newman Sánchez</a>)
-- Hyprlock (Theme by <a href="https://github.com/MrVivekRajan/Hyprlock-Styles"> Vivek Rajan</a>)
-- Hyprpaper
+- Rofi (Theme originally by <a href="https://github.com/newmanls/rofi-themes-collection">Newman Sánchez</a>)
+- Hyprlock (Theme originally by <a href="https://github.com/MrVivekRajan/Hyprlock-Styles"> Vivek Rajan</a>)
+- SWWW
 - Wlogout
 
 Run at your own risk.
