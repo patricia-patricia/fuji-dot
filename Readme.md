@@ -13,6 +13,5 @@ Run at your own risk.
 ```
 git clone https://github.com/patricia-patricia/fuji-dot.git
 cd fuji-dot
-chmod +x ~/fuji-dot/install.sh
 ./install.sh
 ```
