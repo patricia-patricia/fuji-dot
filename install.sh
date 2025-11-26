@@ -103,7 +103,7 @@ Actions=setWallpaper;
 
 [Desktop Action setWallpaper]
 Name=Set as Wallpaper
-Exec=swww img "%f" && notify-send "Wallpaper Set" "%f" -i "%f"
+Exec=swww img "%f" && cp -a -- "%f" ~/.config/hypr/wallpaper && notify-send "Wallpaper Set" "%f" -i "%f"
 Icon=preferences-desktop-wallpaper
 EOF
 
