@@ -86,29 +86,13 @@ else
     echo "Skipping wlogout"
 fi
 
-# ==================== HYPRPAPER + DOLPHIN RIGHT-CLICK ====================
-if ask "Install hyprpaper + Dolphin 'Set as Wallpaper' right-click action?"; then
-    sudo pacman -S --needed --noconfirm hyprpaper
-
-    # Deploy hyprpaper.conf from repo if exists, otherwise create minimal one
-    if [ -f "$FUJI_DIR/hypr/hyprpaper.conf" ]; then
-        replace_config "hypr/hyprpaper.conf"
-    else
-        mkdir -p "$HOME/.config/hypr"
-        cat > "$HOME/.config/hypr/hyprpaper.conf" << 'EOF'
-# Add your wallpapers here, e.g.:
-# preload = ~/Pictures/wallpapers/your-wallpaper.jpg
-# wallpaper = ,~/Pictures/wallpapers/your-wallpaper.jpg
-EOF
-        echo "   Created empty ~/.config/hypr/hyprpaper.conf (edit it later)"
-    fi
-
-    # Start hyprpaper (silent if already running)
-    pkill hyprpaper 2>/dev/null || true
-    hyprpaper --config "$HOME/.config/hypr/hyprpaper.conf" &
+# ==================== SWWW + DOLPHIN RIGHT-CLICK ====================
+if ask "Install swww + Dolphin 'Set as Wallpaper' right-click action?"; then
+    sudo pacman -S --needed --noconfirm swww
+    swww-daemon
 
     # === Dolphin right-click: Set as Wallpaper ===
-    echo "   Adding 'Set as Wallpaper (Hyprpaper)' to Dolphin context menu..."
+    echo "   Adding 'Set as Wallpaper' to Dolphin context menu..."
     mkdir -p "$HOME/.local/share/kio/servicemenus"
 
     cat > "$HOME/.local/share/kio/servicemenus/hyprpaper-set-wallpaper.desktop" << 'EOF'
@@ -120,7 +104,7 @@ Actions=setWallpaper;
 
 [Desktop Action setWallpaper]
 Name=Set as Wallpaper (Hyprpaper)
-Exec=hyprctl hyprpaper reload ",%f" && notify-send "Wallpaper Set" "%f" -i "%f"
+Exec=swww img "%f" && notify-send "Wallpaper Set" "%f" -i "%f"
 Icon=preferences-desktop-wallpaper
 EOF
 
@@ -132,7 +116,7 @@ EOF
 
     echo "   Done! Right-click any image in Dolphin → 'Set as Wallpaper (Hyprpaper)'"
 else
-    echo "Skipping hyprpaper and Dolphin wallpaper menu"
+    echo "Skipping swww and Dolphin wallpaper menu"
 fi
 
 echo ""
