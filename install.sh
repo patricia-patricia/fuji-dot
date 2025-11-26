@@ -89,7 +89,6 @@ fi
 # ==================== SWWW + DOLPHIN RIGHT-CLICK ====================
 if ask "Install swww + Dolphin 'Set as Wallpaper' right-click action?"; then
     sudo pacman -S --needed --noconfirm swww
-    swww-daemon
 
     # === Dolphin right-click: Set as Wallpaper ===
     echo "   Adding 'Set as Wallpaper' to Dolphin context menu..."
@@ -135,5 +134,5 @@ echo "Installation complete!"
 echo "Dotfiles      : $FUJI_DIR"
 echo "Latest backup : $BACKUP_DIR"
 echo "Only 3 newest backups kept automatically"
-echo "Log out or run 'hyprctl reload' to apply changes."
+echo "Press SUPER+M or restart to apply changes."
 echo "======================================================="
