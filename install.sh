@@ -102,7 +102,7 @@ MimeType=image/jpg;image/jpeg;image/png;image/webp;image/bmp;image/avif;
 Actions=setWallpaper;
 
 [Desktop Action setWallpaper]
-Name=Set as Wallpaper (Hyprpaper)
+Name=Set as Wallpaper
 Exec=swww img "%f" && notify-send "Wallpaper Set" "%f" -i "%f"
 Icon=preferences-desktop-wallpaper
 EOF
