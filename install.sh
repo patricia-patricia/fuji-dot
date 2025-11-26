@@ -86,29 +86,12 @@ else
     echo "Skipping wlogout"
 fi
 
-# ==================== HYPRPAPER + DOLPHIN RIGHT-CLICK ====================
-if ask "Install hyprpaper + Dolphin 'Set as Wallpaper' right-click action?"; then
-    sudo pacman -S --needed --noconfirm hyprpaper
-
-    # Deploy hyprpaper.conf from repo if exists, otherwise create minimal one
-    if [ -f "$FUJI_DIR/hypr/hyprpaper.conf" ]; then
-        replace_config "hypr/hyprpaper.conf"
-    else
-        mkdir -p "$HOME/.config/hypr"
-        cat > "$HOME/.config/hypr/hyprpaper.conf" << 'EOF'
-# Add your wallpapers here, e.g.:
-# preload = ~/Pictures/wallpapers/your-wallpaper.jpg
-# wallpaper = ,~/Pictures/wallpapers/your-wallpaper.jpg
-EOF
-        echo "   Created empty ~/.config/hypr/hyprpaper.conf (edit it later)"
-    fi
-
-    # Start hyprpaper (silent if already running)
-    pkill hyprpaper 2>/dev/null || true
-    hyprpaper --config "$HOME/.config/hypr/hyprpaper.conf" &
+# ==================== SWWW + DOLPHIN RIGHT-CLICK ====================
+if ask "Install swww + Dolphin 'Set as Wallpaper' right-click action?"; then
+    sudo pacman -S --needed --noconfirm swww
 
     # === Dolphin right-click: Set as Wallpaper ===
-    echo "   Adding 'Set as Wallpaper (Hyprpaper)' to Dolphin context menu..."
+    echo "   Adding 'Set as Wallpaper' to Dolphin context menu..."
     mkdir -p "$HOME/.local/share/kio/servicemenus"
 
     cat > "$HOME/.local/share/kio/servicemenus/hyprpaper-set-wallpaper.desktop" << 'EOF'
@@ -119,8 +102,8 @@ MimeType=image/jpg;image/jpeg;image/png;image/webp;image/bmp;image/avif;
 Actions=setWallpaper;
 
 [Desktop Action setWallpaper]
-Name=Set as Wallpaper (Hyprpaper)
-Exec=hyprctl hyprpaper reload ",%f" && notify-send "Wallpaper Set" "%f" -i "%f"
+Name=Set as Wallpaper
+Exec=swww img "%f" && cp -a -- "%f" ~/.config/hypr/wallpaper && notify-send "Wallpaper Set" "%f" -i "%f"
 Icon=preferences-desktop-wallpaper
 EOF
 
@@ -132,7 +115,7 @@ EOF
 
     echo "   Done! Right-click any image in Dolphin → 'Set as Wallpaper (Hyprpaper)'"
 else
-    echo "Skipping hyprpaper and Dolphin wallpaper menu"
+    echo "Skipping swww and Dolphin wallpaper menu"
 fi
 
 echo ""
@@ -151,5 +134,5 @@ echo "Installation complete!"
 echo "Dotfiles      : $FUJI_DIR"
 echo "Latest backup : $BACKUP_DIR"
 echo "Only 3 newest backups kept automatically"
-echo "Log out or run 'hyprctl reload' to apply changes."
+echo "Press SUPER+M or restart to apply changes."
 echo "======================================================="
